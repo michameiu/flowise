@@ -10,8 +10,8 @@ RUN apt install curl -y
 RUN curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.7/install.sh | bash
 
 # Set environment variables for nvm
-ENV NVM_DIR /root/.nvm
-ENV NODE_VERSION 20.9.0
+ENV NVM_DIR=/root/.nvm
+ENV NODE_VERSION=20.9.0
 
 # Add nvm and node to PATH
 RUN . $NVM_DIR/nvm.sh && \
@@ -19,7 +19,7 @@ RUN . $NVM_DIR/nvm.sh && \
     nvm alias default $NODE_VERSION && \
     nvm use default
 
-ENV PATH $NVM_DIR/versions/node/v$NODE_VERSION/bin:$PATH
+ENV PATH=$NVM_DIR/versions/node/v$NODE_VERSION/bin:$PATH
 
 # Verify installation
 RUN node -v && npm -v
@@ -27,7 +27,10 @@ RUN node -v && npm -v
 # RUN which nvm
 RUN node --version
 # RUN npm --version
-RUN npm install -g flowise 
+RUN npm install -g flowise@2.1.1
 # EXPOSE 3000
+# ENV FLOWISE_USERNAME=micha
+# ENV FLOWISE_PASSWORD=mwangi
 
+# CMD ["npx","flowise","start","--FLOWISE_USERNAME=$FLOWISE_USERNAME","--FLOWISE_PASSWORD=$FLOWISE_PASSWORD"]
 CMD ["npx","flowise","start"]

@@ -46,7 +46,7 @@ services:
       - redisdata:/data
 
   flowise:
-    image: michameiu/flowise:v1.0.0.arm
+    image: michameiu/flowise:v2.1.1.arm
 
     networks:
       - redis
@@ -56,6 +56,11 @@ services:
 
     ports:
       - 3010:3000
+    
+    environment:
+      - FLOWISE_USERNAME=micha1
+      - FLOWISE_PASSWORD=mwangi1
+      - FLOWISE_AUTHENTICATION=false
 
     volumes:
       - myapp:/myapp/
